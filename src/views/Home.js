@@ -1,16 +1,15 @@
 import React, { useContext } from "react";
 import { DataContext } from "../context";
-import Card from "./components/Card";
-import Picker from "./components/Picker";
+import Card from "../components/Card";
+import Picker from "../components/Picker";
 import CountUp from "react-countup";
 import styled from "styled-components";
 import world from "../images/world.jpg";
 import virus from "../images/virus.png";
+import Chart from "../components/Chart";
 
 const Home = () => {
   const { stats } = useContext(DataContext);
-
-  console.log(stats && stats);
 
   return (
     <>
@@ -64,35 +63,41 @@ const Home = () => {
           )}
         </div>
         {stats && (
-          <div className="cards">
+          <div className="cards-container">
             {stats ? (
-              <h2>{new Date(stats.updated).toLocaleDateString()}</h2>
+              <h2 className="date">
+                {new Date(stats.updated).toLocaleDateString()}
+              </h2>
             ) : (
               <h3>loading...</h3>
             )}
-            <Card
-              title="today's cases"
-              numbers={stats.todayCases}
-              noNumbersInfo="no cases reported so far"
-            />
-            <Card
-              title="deaths"
-              numbers={stats.deaths}
-              info={`death rate: ${((stats.deaths / stats.cases) * 100).toFixed(
-                2
-              )}%`}
-            />
-            <Card title="total recovered" numbers={stats.recovered} />
-            <Card
-              title="tests"
-              numbers={stats.deaths}
-              info={`tests rate per citizen: ${(
-                stats.testsPerOneMillion / 1000000
-              ).toFixed(2)}`}
-            />
+            <div className="cards">
+              <Card
+                title="today's cases"
+                numbers={stats.todayCases}
+                noNumbersInfo="no cases reported so far"
+              />
+              <Card
+                title="deaths"
+                numbers={stats.deaths}
+                info={`death rate: ${(
+                  (stats.deaths / stats.cases) *
+                  100
+                ).toFixed(2)}%`}
+              />
+              <Card title="total recovered" numbers={stats.recovered} />
+              <Card
+                title="tests"
+                numbers={stats.deaths}
+                info={`tests rate: ${(
+                  stats.testsPerOneMillion / 1000000
+                ).toFixed(2)}`}
+              />
+            </div>
           </div>
         )}
       </Container>
+      <Chart />
     </>
   );
 };
@@ -109,7 +114,7 @@ const Container = styled.section`
       left: 50%;
       transform: translateX(-50%);
       z-index: -1;
-      opacity: 0.4;
+      opacity: 0.2;
       width: 100% !important;
       height: 300px !important;
       border-radius: 0 !important;
@@ -126,11 +131,26 @@ const Container = styled.section`
       flex: 2;
     }
     select {
-      width: 100%;
+      width: 85%;
+      font-family: "Roboto Mono", monospace;
+
       border: none;
-      background: rgb(250, 250, 250);
-      padding: 0.5rem;
-      margin-bottom: 2rem;
+      background: #e6e6f5;
+      padding: 1rem 0.5rem;
+      border-radius: 5px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+      font-size: 16px;
+      margin: 0 auto 2rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      &:hover {
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+        transform: scale(1.005);
+      }
+      &:active {
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+        transform: scale(1.005);
+      }
     }
     h1 {
       font-size: 3rem;
@@ -154,26 +174,35 @@ const Container = styled.section`
     }
 
     .image {
-      width: 150px;
+      width: 170px;
       height: 150px;
       border-radius: 10%;
       overflow: hidden;
       display: flex;
       justify-content: center;
       margin: 1rem auto;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+
       img {
         height: 100%;
       }
     }
   }
-  .cards {
+  .cards-container {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     padding: 1rem;
     @media (max-width: 768px) {
       flex: 3;
+    }
+    .date {
+      font-family: "Roboto Mono", monospace;
+      text-align: center;
+      width: 85%;
+      margin: auto;
+      font-size: 2rem;
+      color: #21c197;
+      padding: 0.5rem;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     }
     h2 {
       font-weight: normal;

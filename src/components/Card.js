@@ -10,7 +10,7 @@ const Card = ({ title, numbers, noNumbersInfo, info }) => {
         <CountUp
           start={0}
           end={numbers ? numbers : 0}
-          duration={2.75}
+          duration={1.5}
           separator=" "
         />
       </h1>
@@ -22,14 +22,15 @@ const Card = ({ title, numbers, noNumbersInfo, info }) => {
 
 const CardContainer = styled.div`
   width: 85%;
-  height: 140px;
+  height: 135px;
   margin: 0.5rem auto;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
   text-align: center;
   padding: 0.7rem;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  background: #cdc7db;
 `;
 
 export default Card;
