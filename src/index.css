@@ -20,8 +20,13 @@ body {
 .heading {
   font-size: 3.5rem;
   text-align: center;
+  margin: 2rem auto 1rem;
 }
 
 .heading span img {
   height: 3.5rem;
+}
+
+.numbers {
+  font-family: "Roboto Mono", monospace;
 }

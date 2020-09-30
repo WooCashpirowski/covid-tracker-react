@@ -9,7 +9,7 @@ import virus from "../images/virus.png";
 import Chart from "../components/Chart";
 
 const Home = () => {
-  const { stats } = useContext(DataContext);
+  const { stats, allCountriesData } = useContext(DataContext);
 
   return (
     <>
@@ -50,6 +50,7 @@ const Home = () => {
                 Total cases: <br />
                 <span>
                   <CountUp
+                    className="numbers"
                     start={0}
                     end={stats.cases ? stats.cases : 0}
                     duration={2.75}
@@ -73,23 +74,23 @@ const Home = () => {
             )}
             <div className="cards">
               <Card
-                title="today's cases"
+                title="Today's cases"
                 numbers={stats.todayCases}
                 noNumbersInfo="no cases reported so far"
               />
               <Card
-                title="deaths"
+                title="Deaths"
                 numbers={stats.deaths}
-                info={`death rate: ${(
+                info={`Death rate: ${(
                   (stats.deaths / stats.cases) *
                   100
                 ).toFixed(2)}%`}
               />
-              <Card title="total recovered" numbers={stats.recovered} />
+              <Card title="Total recovered" numbers={stats.recovered} />
               <Card
-                title="tests"
-                numbers={stats.deaths}
-                info={`tests rate: ${(
+                title="Tests"
+                numbers={stats.tests}
+                info={`Tests rate: ${(
                   stats.testsPerOneMillion / 1000000
                 ).toFixed(2)}`}
               />
@@ -97,7 +98,7 @@ const Home = () => {
           </div>
         )}
       </Container>
-      <Chart />
+      {allCountriesData && <Chart />}
     </>
   );
 };
@@ -136,7 +137,7 @@ const Container = styled.section`
 
       border: none;
       background: #e6e6f5;
-      padding: 1rem 0.5rem;
+      padding: 1rem;
       border-radius: 5px;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
       font-size: 16px;

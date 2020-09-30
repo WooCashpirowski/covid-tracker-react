@@ -8,6 +8,7 @@ const Card = ({ title, numbers, noNumbersInfo, info }) => {
       <h2>{title}</h2>
       <h1>
         <CountUp
+          className="numbers"
           start={0}
           end={numbers ? numbers : 0}
           duration={1.5}

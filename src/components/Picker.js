@@ -6,7 +6,7 @@ const Picker = () => {
 
   return (
     <select
-      onClick={(e) => {
+      onChange={(e) => {
         if (e.target.value !== "") {
           setCountry(`countries/${e.target.value}?yesterday=false`);
         } else {

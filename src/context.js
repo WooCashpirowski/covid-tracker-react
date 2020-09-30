@@ -31,10 +31,10 @@ const DataProvider = ({ children }) => {
       }
     };
     fetchStats();
-  }, [country]);
+  }, [country, setCountry]);
   useEffect(() => {
     fetchCountries();
-  }, [setCountriesList, setAllCountriesData]);
+  }, []);
 
   return (
     <DataContext.Provider
