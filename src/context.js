@@ -10,6 +10,7 @@ const DataProvider = ({ children }) => {
   const [country, setCountry] = useState("all");
   const [countriesList, setCountriesList] = useState([]);
   const [allCountriesData, setAllCountriesData] = useState([]);
+  const [previousDay, setPreviousDay] = useState();
 
   const fetchCountries = async () => {
     try {
@@ -31,14 +32,32 @@ const DataProvider = ({ children }) => {
       }
     };
     fetchStats();
-  }, [country, setCountry]);
+  }, [country]);
+
+  useEffect(() => {
+    const fetchPreviousDay = async () => {
+      try {
+        const response = await axios(`${rootURL}/${country}/?yesterday=true`);
+        setPreviousDay(response.data.todayCases);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchPreviousDay();
+  }, [country]);
   useEffect(() => {
     fetchCountries();
   }, []);
 
   return (
     <DataContext.Provider
-      value={{ setCountry, stats, countriesList, allCountriesData }}
+      value={{
+        setCountry,
+        previousDay,
+        stats,
+        countriesList,
+        allCountriesData,
+      }}
     >
       {children}
     </DataContext.Provider>

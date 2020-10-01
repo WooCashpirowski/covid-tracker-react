@@ -8,7 +8,7 @@ body {
   font-family: "Nunito", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #e6e6f5;
+  background-color: #fffaeb;
 }
 
 * {
@@ -25,6 +25,7 @@ body {
 
 .heading span img {
   height: 3.5rem;
+  padding-top: 16px;
 }
 
 .numbers {

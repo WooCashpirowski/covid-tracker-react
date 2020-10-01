@@ -15,9 +15,9 @@ const Chart = () => {
     };
   });
 
-  if (data.length) {
-    console.log(data);
-  }
+  // if (data.length) {
+  //   console.log(data);
+  // }
 
   return data && <ChartStyled></ChartStyled>;
 };

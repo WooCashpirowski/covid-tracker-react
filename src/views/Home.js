@@ -9,7 +9,7 @@ import virus from "../images/virus.png";
 import Chart from "../components/Chart";
 
 const Home = () => {
-  const { stats, allCountriesData } = useContext(DataContext);
+  const { stats, allCountriesData, previousDay } = useContext(DataContext);
 
   return (
     <>
@@ -46,6 +46,10 @@ const Home = () => {
               <h4>
                 region: <span>{stats.continent}</span>
               </h4>
+              <h4>
+                population:{" "}
+                <span>{Math.round(stats.population / 1000000)} mln</span>
+              </h4>
               <h2>
                 Total cases: <br />
                 <span>
@@ -74,25 +78,28 @@ const Home = () => {
             )}
             <div className="cards">
               <Card
-                title="Today's cases"
+                title="Today's cases:"
                 numbers={stats.todayCases}
-                noNumbersInfo="no cases reported so far"
+                noNumbersInfo="no cases reported today"
+                yesterday={previousDay}
               />
+
               <Card
-                title="Deaths"
+                title="Deaths:"
                 numbers={stats.deaths}
                 info={`Death rate: ${(
                   (stats.deaths / stats.cases) *
                   100
                 ).toFixed(2)}%`}
               />
-              <Card title="Total recovered" numbers={stats.recovered} />
+              <Card title="Total recovered:" numbers={stats.recovered} />
               <Card
-                title="Tests"
+                title="Tests:"
                 numbers={stats.tests}
                 info={`Tests rate: ${(
-                  stats.testsPerOneMillion / 1000000
-                ).toFixed(2)}`}
+                  (stats.testsPerOneMillion / 1000000) *
+                  100
+                ).toFixed(2)}%`}
               />
             </div>
           </div>
@@ -108,14 +115,13 @@ const Container = styled.section`
   @media (max-width: 568px) {
     flex-direction: column;
     text-align: center;
-    position: relative;
     .image {
       position: absolute;
-      top: -10px;
+      top: -16px;
       left: 50%;
       transform: translateX(-50%);
       z-index: -1;
-      opacity: 0.2;
+      opacity: 0.4;
       width: 100% !important;
       height: 300px !important;
       border-radius: 0 !important;
@@ -136,7 +142,7 @@ const Container = styled.section`
       font-family: "Roboto Mono", monospace;
 
       border: none;
-      background: #e6e6f5;
+      background: #7fd1ae;
       padding: 1rem;
       border-radius: 5px;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
@@ -197,11 +203,12 @@ const Container = styled.section`
     }
     .date {
       font-family: "Roboto Mono", monospace;
+      font-weight: bold;
       text-align: center;
       width: 85%;
       margin: auto;
       font-size: 2rem;
-      color: #21c197;
+      color: #f3944c;
       padding: 0.5rem;
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     }

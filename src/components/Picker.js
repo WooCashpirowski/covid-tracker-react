@@ -8,7 +8,7 @@ const Picker = () => {
     <select
       onChange={(e) => {
         if (e.target.value !== "") {
-          setCountry(`countries/${e.target.value}?yesterday=false`);
+          setCountry(`countries/${e.target.value}`);
         } else {
           setCountry(`all`);
         }
