@@ -6,9 +6,9 @@ const rootURL = "https://disease.sh/v3/covid-19";
 const DataContext = createContext();
 
 const DataProvider = ({ children }) => {
-  const currentCountry =
-    localStorage.getItem("country") &&
-    JSON.parse(localStorage.getItem("country"));
+  const currentCountry = localStorage.getItem("country")
+    ? JSON.parse(localStorage.getItem("country"))
+    : "all";
 
   const [stats, setStats] = useState();
   const [country, setCountry] = useState(currentCountry);
