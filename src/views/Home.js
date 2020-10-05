@@ -7,6 +7,7 @@ import styled from "styled-components";
 import world from "../images/world.jpg";
 import virus from "../images/virus.png";
 import Charts from "../components/Charts";
+import History from "../components/charts/History";
 
 const Home = () => {
   const { stats, previousDay } = useContext(DataContext);
@@ -29,30 +30,31 @@ const Home = () => {
           {stats ? (
             <>
               {stats.country ? (
-                <>
-                  <h1>{stats.country}</h1>
-
+                <div className="country-info-container">
                   <div className="image">
                     <img src={stats.countryInfo.flag} alt={stats.country} />
                   </div>
-                </>
+                  <div className="country-info">
+                    <h1>{stats.country}</h1>
+                    <h4>
+                      region: <span>{stats.continent}</span>
+                    </h4>
+                    <h4>
+                      population:{" "}
+                      <span>{(stats.population / 1000000).toFixed(2)} mln</span>
+                    </h4>
+                  </div>
+                </div>
               ) : (
-                <>
-                  <h1>World</h1>
+                <div className="country-info-container">
                   <div className="image">
                     <img src={world} alt="world" />
                   </div>
-                </>
+                  <h1>World</h1>
+                </div>
               )}
-              <h4>
-                region: <span>{stats.continent}</span>
-              </h4>
-              <h4>
-                population:{" "}
-                <span>{(stats.population / 1000000).toFixed(2)} mln</span>
-              </h4>
-              <h2>
-                Total cases: <br />
+              <h2 className="total-cases">
+                <span className="label">Total cases: </span>
                 <span>
                   <CountUp
                     className="numbers"
@@ -63,6 +65,7 @@ const Home = () => {
                   />
                 </span>
               </h2>
+              <History />
             </>
           ) : (
             <h3>Loading...</h3>
@@ -139,7 +142,7 @@ const Container = styled.section`
       flex: 2;
     }
     select {
-      width: 85%;
+      width: 90%;
       font-family: "Roboto Mono", monospace;
       border: none;
       border-bottom: 2px solid #7fd1ae;
@@ -162,14 +165,6 @@ const Container = styled.section`
       font-size: 3rem;
       margin-bottom: 1rem;
     }
-    h2 {
-      font-weight: normal;
-      margin-top: 1rem;
-      span {
-        font-weight: bold;
-        font-size: 3rem;
-      }
-    }
     h3 {
     }
     h4 {
@@ -179,18 +174,49 @@ const Container = styled.section`
       }
     }
 
-    .image {
-      width: 170px;
-      height: 150px;
-      border-radius: 10%;
-      overflow: hidden;
+    .country-info-container {
       display: flex;
-      justify-content: center;
-      margin: 1rem auto;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      align-items: center;
+      justify-content: space-around;
+      margin: 0 auto;
+      flex-wrap: wrap;
+      .image {
+        width: 170px;
+        height: 150px;
+        border-radius: 10%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 
-      img {
-        height: 100%;
+        img {
+          height: 100%;
+        }
+      }
+      .country-info {
+        text-align: left;
+      }
+      @media (max-width: 768px) {
+        justify-content: center;
+        .country-info {
+          text-align: center;
+        }
+      }
+    }
+    .total-cases {
+      font-weight: normal;
+      display: flex;
+      flex-wrap: wrap;
+      width: 85%;
+      margin: 1rem auto;
+      align-items: center;
+      justify-content: space-evenly;
+
+      .label {
+        font-size: 1.5rem;
+      }
+      span:nth-child(2) {
+        font-size: 3rem;
       }
     }
   }

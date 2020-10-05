@@ -15,6 +15,7 @@ const DataProvider = ({ children }) => {
   const [countriesList, setCountriesList] = useState([]);
   const [allCountriesData, setAllCountriesData] = useState([]);
   const [previousDay, setPreviousDay] = useState();
+  const [history, setHistory] = useState({});
 
   useEffect(() => {
     localStorage.setItem("country", JSON.stringify(country));
@@ -52,6 +53,20 @@ const DataProvider = ({ children }) => {
         console.log(error);
       }
     };
+    const fetchHistory = async () => {
+      try {
+        const response = await axios(
+          `${rootURL}/historical/${country.replace(
+            "countries/",
+            ""
+          )}?lastdays=all`
+        );
+        setHistory(response.data.timeline.cases);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchHistory();
     fetchPreviousDay();
   }, [country]);
   useEffect(() => {
@@ -66,6 +81,7 @@ const DataProvider = ({ children }) => {
         stats,
         countriesList,
         allCountriesData,
+        history,
       }}
     >
       {children}
