@@ -65,7 +65,7 @@ const Home = () => {
                   />
                 </span>
               </h2>
-              <History />
+              {stats.country && <History />}
             </>
           ) : (
             <h3>Loading...</h3>
