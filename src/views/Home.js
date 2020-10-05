@@ -6,10 +6,10 @@ import CountUp from "react-countup";
 import styled from "styled-components";
 import world from "../images/world.jpg";
 import virus from "../images/virus.png";
-import Chart from "../components/Chart";
+import Charts from "../components/Charts";
 
 const Home = () => {
-  const { stats, allCountriesData, previousDay } = useContext(DataContext);
+  const { stats, previousDay } = useContext(DataContext);
 
   return (
     <>
@@ -21,6 +21,7 @@ const Home = () => {
         </span>{" "}
         NOW
       </h1>
+
       <Container>
         <div className="info">
           <Picker />
@@ -48,7 +49,7 @@ const Home = () => {
               </h4>
               <h4>
                 population:{" "}
-                <span>{Math.round(stats.population / 1000000)} mln</span>
+                <span>{(stats.population / 1000000).toFixed(2)} mln</span>
               </h4>
               <h2>
                 Total cases: <br />
@@ -87,7 +88,7 @@ const Home = () => {
               <Card
                 title="Deaths:"
                 numbers={stats.deaths}
-                info={`Death rate: ${(
+                info={`Mortality rate: ${(
                   (stats.deaths / stats.cases) *
                   100
                 ).toFixed(2)}%`}
@@ -104,15 +105,15 @@ const Home = () => {
             </div>
           </div>
         )}
+        <Charts />
       </Container>
-      {allCountriesData && <Chart />}
     </>
   );
 };
 
 const Container = styled.section`
   display: flex;
-  @media (max-width: 568px) {
+  @media (max-width: 768px) {
     flex-direction: column;
     text-align: center;
     .image {
@@ -140,22 +141,20 @@ const Container = styled.section`
     select {
       width: 85%;
       font-family: "Roboto Mono", monospace;
-
       border: none;
-      background: #7fd1ae;
+      border-bottom: 2px solid #7fd1ae;
       padding: 1rem;
-      border-radius: 5px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
       font-size: 16px;
       margin: 0 auto 2rem;
       cursor: pointer;
       transition: all 0.2s ease;
       &:hover {
-        box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
         transform: scale(1.005);
       }
       &:active {
-        box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
         transform: scale(1.005);
       }
     }
@@ -198,16 +197,13 @@ const Container = styled.section`
   .cards-container {
     flex: 1;
     padding: 1rem;
-    @media (max-width: 768px) {
-      flex: 3;
-    }
     .date {
       font-family: "Roboto Mono", monospace;
       font-weight: bold;
       text-align: center;
       width: 85%;
       margin: auto;
-      font-size: 2rem;
+      font-size: 2.5rem;
       color: #f3944c;
       padding: 0.5rem;
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);

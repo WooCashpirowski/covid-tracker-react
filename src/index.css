@@ -8,7 +8,8 @@ body {
   font-family: "Nunito", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #fffaeb;
+  background-color: #22252c;
+  color: #fff;
 }
 
 * {
@@ -18,13 +19,13 @@ body {
 }
 
 .heading {
-  font-size: 3.5rem;
+  font-size: 4.5rem;
   text-align: center;
   margin: 2rem auto 1rem;
 }
 
 .heading span img {
-  height: 3.5rem;
+  height: 4.5rem;
   padding-top: 16px;
 }
 

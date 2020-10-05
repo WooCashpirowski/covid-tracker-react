@@ -14,7 +14,7 @@ const Picker = () => {
         }
       }}
     >
-      <option value="">...</option>
+      <option value="">choose country</option>
       {countriesList.map((country, i) => (
         <option key={i} value={country}>
           {country}
