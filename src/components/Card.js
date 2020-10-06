@@ -46,14 +46,14 @@ const CardContainer = styled.div`
   width: 85%;
   height: 135px;
   margin: 0.5rem auto;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
   text-align: center;
   padding: 0.7rem;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  background: #f3944c;
-  border-bottom: 5px solid #7fd1ae;
+  border-left: 2px solid #7fd1ae;
+  border-top: 2px solid #7fd1ae;
 `;
 
 export default Card;

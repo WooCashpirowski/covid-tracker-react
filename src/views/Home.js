@@ -8,6 +8,7 @@ import world from "../images/world.jpg";
 import virus from "../images/virus.png";
 import Charts from "../components/Charts";
 import History from "../components/charts/History";
+import Footer from "../components/Footer";
 
 const Home = () => {
   const { stats, previousDay } = useContext(DataContext);
@@ -110,37 +111,18 @@ const Home = () => {
         )}
         <Charts />
       </Container>
+      <Footer />
     </>
   );
 };
 
 const Container = styled.section`
   display: flex;
-  @media (max-width: 768px) {
-    flex-direction: column;
-    text-align: center;
-    .image {
-      position: absolute;
-      top: -16px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: -1;
-      opacity: 0.4;
-      width: 100% !important;
-      height: 300px !important;
-      border-radius: 0 !important;
-      img {
-        width: 100%;
-      }
-    }
-  }
+
   .info {
     flex: 1;
     padding: 1rem;
     text-align: center;
-    @media (max-width: 768px) {
-      flex: 2;
-    }
     select {
       width: 90%;
       font-family: "Roboto Mono", monospace;
@@ -196,12 +178,6 @@ const Container = styled.section`
       .country-info {
         text-align: left;
       }
-      @media (max-width: 768px) {
-        justify-content: center;
-        .country-info {
-          text-align: center;
-        }
-      }
     }
     .total-cases {
       font-weight: normal;
@@ -239,6 +215,33 @@ const Container = styled.section`
     }
     h1 {
       font-size: 2rem;
+    }
+  }
+  @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
+    .image {
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: -1;
+      opacity: 0.4;
+      width: 100% !important;
+      height: 300px !important;
+      border-radius: 0 !important;
+      img {
+        width: 100%;
+      }
+    }
+    .info {
+      flex: 2;
+      .country-info-container {
+        justify-content: center;
+        .country-info {
+          text-align: center;
+        }
+      }
     }
   }
 `;
