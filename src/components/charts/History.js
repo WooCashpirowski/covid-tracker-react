@@ -11,7 +11,7 @@ const History = () => {
   const { history } = useContext(DataContext);
 
   const historyData = Object.keys(history).map((key) => {
-    const newDate = `${key.split("/")[1]}-${key.split("/")[0]}-20${
+    const newDate = `${key.split("/")[1]}/${key.split("/")[0]}/20${
       key.split("/")[2]
     }`;
     return {
@@ -23,7 +23,7 @@ const History = () => {
   const chartConfigs = {
     type: "line",
     width: "100%",
-    height: "350",
+    height: "305",
     dataFormat: "json",
     dataSource: {
       chart: {
@@ -33,7 +33,7 @@ const History = () => {
         labelFontSize: "10",
         theme: "candy",
         alignCaptionWithCanvas: 0,
-        labelStep: 30,
+        labelStep: 15,
         slantLabels: 1,
         rotateLabels: 1,
         drawAnchors: 0,

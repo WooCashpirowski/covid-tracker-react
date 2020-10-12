@@ -7,14 +7,15 @@ const Picker = () => {
   return (
     <select
       onChange={(e) => {
-        if (e.target.value !== "") {
+        if (e.target.value !== "all") {
           setCountry(`countries/${e.target.value}`);
         } else {
           setCountry(`all`);
         }
       }}
     >
-      <option value="">choose country</option>
+      <option value="all">choose country</option>
+      <option value="all">World</option>
       {countriesList.map((country, i) => (
         <option key={i} value={country}>
           {country}
