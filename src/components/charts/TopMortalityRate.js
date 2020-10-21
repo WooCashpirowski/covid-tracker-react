@@ -23,7 +23,7 @@ const TopTenToday = ({ data }) => {
         captionFont: "Nunito",
         usePlotGradientColor: "1",
         xAxisName: "Country",
-        yAxisName: "Today's cases",
+        yAxisName: "Mortality rate",
         theme: "candy",
         alignCaptionWithCanvas: 0,
       },

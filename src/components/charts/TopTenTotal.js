@@ -14,7 +14,7 @@ const TopTenToday = ({ data }) => {
     dataFormat: "json",
     dataSource: {
       chart: {
-        caption: "Top 10 countries with the highest number of cases",
+        caption: "Countries with the highest number of cases in total",
         palettecolors: "7fd1ae",
         captionFont: "Nunito",
         xAxisName: "Country",

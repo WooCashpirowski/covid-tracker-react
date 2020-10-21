@@ -14,6 +14,7 @@ const DataProvider = ({ children }) => {
   const [country, setCountry] = useState(currentCountry);
   const [countriesList, setCountriesList] = useState([]);
   const [allCountriesData, setAllCountriesData] = useState([]);
+  const [yesterdayCountriesData, setYesterdayCountriesData] = useState([]);
   const [previousDay, setPreviousDay] = useState();
   const [history, setHistory] = useState({});
 
@@ -27,6 +28,14 @@ const DataProvider = ({ children }) => {
       const response = await axios(`${rootURL}/countries`);
       setCountriesList(response.data.map((item) => item.country));
       setAllCountriesData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const fetchYesterdayData = async () => {
+    try {
+      const response = await axios(`${rootURL}/countries?yesterday=true`);
+      setYesterdayCountriesData(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -71,6 +80,7 @@ const DataProvider = ({ children }) => {
   }, [country]);
   useEffect(() => {
     fetchCountries();
+    fetchYesterdayData();
   }, []);
 
   return (
@@ -82,6 +92,7 @@ const DataProvider = ({ children }) => {
         countriesList,
         allCountriesData,
         history,
+        yesterdayCountriesData,
       }}
     >
       {children}
