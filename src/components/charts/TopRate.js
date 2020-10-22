@@ -6,7 +6,7 @@ import CandyTheme from "fusioncharts/themes/fusioncharts.theme.candy";
 
 ReactFC.fcRoot(FusionCharts, Chart, CandyTheme);
 
-const TopTenToday = ({ data }) => {
+const TopRate = ({ data, caption, subCaption, yAxisName, palettecolors }) => {
   const chartConfigs = {
     type: "bar2d",
     width: "100%",
@@ -14,8 +14,9 @@ const TopTenToday = ({ data }) => {
     dataFormat: "json",
     dataSource: {
       chart: {
-        caption: "Top 15 countries with the highest mortality rate",
-        subCaption: "Number of deaths in relation to the number of infections",
+        caption,
+        subCaption,
+        palettecolors,
         subCaptionFontSize: "12",
         labelFontSize: "9",
         valueFontSize: "10",
@@ -23,7 +24,7 @@ const TopTenToday = ({ data }) => {
         captionFont: "Nunito",
         usePlotGradientColor: "1",
         xAxisName: "Country",
-        yAxisName: "Mortality rate",
+        yAxisName,
         theme: "candy",
         alignCaptionWithCanvas: 0,
       },
@@ -34,4 +35,4 @@ const TopTenToday = ({ data }) => {
   return <ReactFC {...chartConfigs} />;
 };
 
-export default TopTenToday;
+export default TopRate;

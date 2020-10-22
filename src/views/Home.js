@@ -11,8 +11,7 @@ import History from "../components/charts/History";
 import Footer from "../components/Footer";
 
 const Home = () => {
-  const { stats, previousDay } = useContext(DataContext);
-
+  const { stats, previousDay, allCountriesData } = useContext(DataContext);
   return (
     <>
       <h1 className="heading">
@@ -31,41 +30,61 @@ const Home = () => {
           {stats ? (
             <>
               {stats.country ? (
-                <div className="country-info-container">
-                  <div className="image">
-                    <img src={stats.countryInfo.flag} alt={stats.country} />
+                <>
+                  <div className="country-info-container">
+                    <div className="image">
+                      <img src={stats.countryInfo.flag} alt={stats.country} />
+                    </div>
+                    <div className="country-info">
+                      <h1>{stats.country}</h1>
+                      <h4>
+                        region: <span>{stats.continent}</span>
+                      </h4>
+                      <h4>
+                        population:{" "}
+                        <span>
+                          {(stats.population / 1000000).toFixed(2)} mln
+                        </span>
+                      </h4>
+                    </div>
                   </div>
-                  <div className="country-info">
-                    <h1>{stats.country}</h1>
-                    <h4>
-                      region: <span>{stats.continent}</span>
-                    </h4>
-                    <h4>
-                      population:{" "}
-                      <span>{(stats.population / 1000000).toFixed(2)} mln</span>
-                    </h4>
-                  </div>
-                </div>
+                  <h2 className="total-cases">
+                    <span className="label">Total cases: </span>
+                    <span>
+                      <CountUp
+                        className="numbers"
+                        start={0}
+                        end={stats.cases ? stats.cases : 0}
+                        duration={2.75}
+                        separator=" "
+                      />
+                    </span>
+                  </h2>
+                </>
               ) : (
-                <div className="country-info-container">
-                  <div className="image">
-                    <img src={world} alt="world" />
+                <>
+                  <div className="country-info-container">
+                    <div className="image">
+                      <img src={world} alt="world" />
+                    </div>
+                    <h1>World</h1>
                   </div>
-                  <h1>World</h1>
-                </div>
+                  <h2 className="total-cases">
+                    <span className="label">Total cases: </span>
+                    <span>
+                      <CountUp
+                        className="numbers"
+                        start={0}
+                        end={allCountriesData
+                          .map((item) => item.cases)
+                          .reduce((a, b) => a + b, 0)}
+                        duration={2.75}
+                        separator=" "
+                      />
+                    </span>
+                  </h2>
+                </>
               )}
-              <h2 className="total-cases">
-                <span className="label">Total cases: </span>
-                <span>
-                  <CountUp
-                    className="numbers"
-                    start={0}
-                    end={stats.cases ? stats.cases : 0}
-                    duration={2.75}
-                    separator=" "
-                  />
-                </span>
-              </h2>
               {stats.country && <History />}
             </>
           ) : (

@@ -6,7 +6,7 @@ import CandyTheme from "fusioncharts/themes/fusioncharts.theme.candy";
 
 ReactFC.fcRoot(FusionCharts, Chart, CandyTheme);
 
-const TopTenToday = ({ data, caption, palettecolors }) => {
+const TopTenCol3d = ({ data, caption, palettecolors }) => {
   const chartConfigs = {
     type: "column3d",
     width: "100%",
@@ -31,4 +31,4 @@ const TopTenToday = ({ data, caption, palettecolors }) => {
   return <ReactFC {...chartConfigs} />;
 };
 
-export default TopTenToday;
+export default TopTenCol3d;

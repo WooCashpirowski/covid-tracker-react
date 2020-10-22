@@ -6,7 +6,7 @@ import CandyTheme from "fusioncharts/themes/fusioncharts.theme.candy";
 
 ReactFC.fcRoot(FusionCharts, Chart, CandyTheme);
 
-const TopTenToday = ({ data }) => {
+const TopTenToday = ({ data, caption, palettecolors, yAxisName }) => {
   const chartConfigs = {
     type: "bar3d",
     width: "100%",
@@ -14,11 +14,11 @@ const TopTenToday = ({ data }) => {
     dataFormat: "json",
     dataSource: {
       chart: {
-        caption: "Countries with the highest number of cases in total",
-        palettecolors: "7fd1ae",
+        caption,
+        palettecolors,
         captionFont: "Nunito",
         xAxisName: "Country",
-        yAxisName: "Total cases",
+        yAxisName,
         theme: "candy",
         alignCaptionWithCanvas: 0,
       },

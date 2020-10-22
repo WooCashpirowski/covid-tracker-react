@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { DataContext } from "../context";
 import styled from "styled-components";
-import TopTenToday from "./charts/TopTenToday";
+import TopTenCol3d from "./charts/TopTenCol3d";
 import TopTenTotal from "./charts/TopTenTotal";
-import TopMortalityRate from "./charts/TopMortalityRate";
+import TopRate from "./charts/TopRate";
+import Sunburst from "../components/charts/Sunburst";
 import Carousela from "./Carousela";
+import { BsArrowsFullscreen, BsFullscreenExit } from "react-icons/bs";
 
 const Charts = () => {
   const { allCountriesData, yesterdayCountriesData } = useContext(DataContext);
@@ -18,6 +20,8 @@ const Charts = () => {
       deaths: country.deaths,
       recovered: country.recovered,
       flag: country.countryInfo.flag,
+      population: country.population,
+      tests: country.tests,
     };
   });
   const yesterdayData = yesterdayCountriesData.map((country) => {
@@ -60,52 +64,126 @@ const Charts = () => {
       };
     });
 
-  const deathsRate = countriesData.map((item) => {
-    const rate = ((item.deaths / item.cases) * 100).toFixed(2);
-    return {
-      label: item.country,
-      value: rate,
-    };
-  });
-
-  const topDeathsRate = deathsRate
+  const topDeathsRate = countriesData
+    .map((item) => {
+      const rate = ((item.deaths / item.cases) * 100).toFixed(2);
+      return {
+        label: item.country,
+        value: rate,
+      };
+    })
     .sort((a, b) => b.value - a.value)
     .slice(0, 15);
+
+  const topTestsRate = countriesData
+    .map((item) => {
+      const rate = ((item.tests / item.population) * 100).toFixed(2);
+      return {
+        label: item.country,
+        value: rate,
+      };
+    })
+    .sort((a, b) => b.value - a.value)
+    .slice(0, 10);
+
+  const topTests = countriesData
+    .map((item) => {
+      return {
+        label: item.country,
+        value: item.tests,
+      };
+    })
+    .sort((a, b) => b.value - a.value)
+    .slice(0, 10);
+
+  const [largeChart, setLargeChart] = useState(false);
 
   return (
     <ChartStyled>
       {countriesData.length ? (
         <>
-          <div className="chart">
-            <TopTenTotal data={topTenTotal} />
-            <div className="overlay"></div>
+          <div className="chart sunburst">
+            <Sunburst />
+            <button
+              className="full-screen-btn"
+              onClick={() => setLargeChart(true)}
+            >
+              <BsArrowsFullscreen />
+            </button>
           </div>
+
           <div className="chart">
             <Carousela>
               <div>
-                <TopTenToday
+                <TopTenTotal
+                  data={topTenTotal}
+                  caption="Countries with the highest number of cases in total"
+                  palettecolors="7fd1ae"
+                  yAxisName="Total cases"
+                />
+                <div className="overlay"></div>
+              </div>
+              <div>
+                <TopTenCol3d
                   data={topTenToday}
-                  caption="Countries with the highest number of daily cases"
+                  caption="Today's top daily cases"
                   palettecolors="528140"
                 />
                 <div className="overlay"></div>
               </div>
               <div>
-                <TopTenToday
+                <TopTenCol3d
                   data={topTenYesterday}
                   caption="Yesterday's top daily cases"
                   palettecolors="f3944c"
                 />
+                <div className="overlay"></div>
+              </div>
+              <div>
+                <TopRate
+                  data={topDeathsRate}
+                  caption="Countries with the highest mortality rate"
+                  subCaption="Number of deaths in relation to the number of infections"
+                  yAxisName="Mortality rate"
+                  palettecolors="f3944c"
+                />
+                <div className="overlay"></div>
+              </div>
+              <div>
+                <TopTenTotal
+                  data={topTests}
+                  caption="Countries with the highest number of tests"
+                  palettecolors="528140"
+                  yAxisName="Total tests"
+                />
+                <div className="overlay"></div>
+              </div>
+              <div>
+                <TopRate
+                  data={topTestsRate}
+                  caption="Countries with the highest tests rate"
+                  subCaption="Number of tests in relation to the number of population"
+                  yAxisName="Tests rate"
+                  palettecolors="528140"
+                />
+                <div className="overlay"></div>
               </div>
             </Carousela>
-          </div>
-          <div className="chart">
-            <TopMortalityRate data={topDeathsRate} />
-            <div className="overlay"></div>
           </div>
         </>
       ) : (
         <p style={{ textAlign: "center" }}>loading charts...</p>
+      )}
+      {largeChart && (
+        <div className="sunburst-large">
+          <Sunburst />
+          <button
+            className="full-screen-btn"
+            onClick={() => setLargeChart(false)}
+          >
+            <BsFullscreenExit />
+          </button>
+        </div>
       )}
     </ChartStyled>
   );
@@ -121,6 +199,37 @@ const ChartStyled = styled.section`
     margin-bottom: 0.5rem;
     position: relative;
     width: 100%;
+    &.sunburst {
+      height: 350px;
+      .full-screen-btn {
+        position: absolute;
+        top: 0.5em;
+        right: 0.5em;
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+    }
+  }
+  .sunburst-large {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 10000 !important;
+    .full-screen-btn {
+      position: fixed;
+      top: 0.5em;
+      right: 0.5em;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
   }
   @media (max-width: 768px) {
     margin: 0 auto;

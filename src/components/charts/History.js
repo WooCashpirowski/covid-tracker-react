@@ -23,7 +23,7 @@ const History = () => {
   const chartConfigs = {
     type: "line",
     width: "100%",
-    height: "305",
+    height: "350",
     dataFormat: "json",
     dataSource: {
       chart: {
