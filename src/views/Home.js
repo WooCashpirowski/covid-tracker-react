@@ -75,9 +75,7 @@ const Home = () => {
                       <CountUp
                         className="numbers"
                         start={0}
-                        end={allCountriesData
-                          .map((item) => item.cases)
-                          .reduce((a, b) => a + b, 0)}
+                        end={allCountriesData.reduce((a, b) => a + b.cases, 0)}
                         duration={2.75}
                         separator=" "
                       />

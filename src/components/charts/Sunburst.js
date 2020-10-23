@@ -117,6 +117,9 @@ const Sunburst = () => {
         subcaption: "Regions and countries",
         showplotborder: "1",
         theme: "candy",
+        palettecolors: "F3944C,E87271,BD638C,825F90,4B577B,518A38,006F5E",
+        centerAngle: "45",
+        hoverFillColor: "#F3944C",
       },
       data,
       styles: {

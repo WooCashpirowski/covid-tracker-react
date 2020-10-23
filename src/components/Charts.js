@@ -5,6 +5,7 @@ import TopTenCol3d from "./charts/TopTenCol3d";
 import TopTenTotal from "./charts/TopTenTotal";
 import TopRate from "./charts/TopRate";
 import Sunburst from "../components/charts/Sunburst";
+import Pie from "../components/charts/Pie";
 import Carousela from "./Carousela";
 import { BsArrowsFullscreen, BsFullscreenExit } from "react-icons/bs";
 
@@ -102,8 +103,8 @@ const Charts = () => {
     <ChartStyled>
       {countriesData.length ? (
         <>
-          <div className="chart sunburst">
-            <Sunburst />
+          <div className="chart pie">
+            <Pie />
             <button
               className="full-screen-btn"
               onClick={() => setLargeChart(true)}
@@ -199,7 +200,7 @@ const ChartStyled = styled.section`
     margin-bottom: 0.5rem;
     position: relative;
     width: 100%;
-    &.sunburst {
+    &.pie {
       height: 350px;
       .full-screen-btn {
         position: absolute;
