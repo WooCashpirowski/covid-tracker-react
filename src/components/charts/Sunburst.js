@@ -67,12 +67,6 @@ const Sunburst = () => {
       value: 0,
     },
     {
-      id: "1.3",
-      parent: "0.0",
-      name: "Asia",
-      value: 0,
-    },
-    {
       id: "1.1",
       parent: "0.0",
       name: "Africa",
@@ -85,9 +79,9 @@ const Sunburst = () => {
       value: 0,
     },
     {
-      id: "1.6",
+      id: "1.3",
       parent: "0.0",
-      name: "South America",
+      name: "Asia",
       value: 0,
     },
     {
@@ -100,6 +94,12 @@ const Sunburst = () => {
       id: "1.5",
       parent: "0.0",
       name: "Australia/Oceania",
+      value: 0,
+    },
+    {
+      id: "1.6",
+      parent: "0.0",
+      name: "South America",
       value: 0,
     },
   ];
@@ -118,7 +118,6 @@ const Sunburst = () => {
         showplotborder: "1",
         theme: "candy",
         palettecolors: "F3944C,E87271,BD638C,825F90,4B577B,518A38,006F5E",
-        centerAngle: "45",
         hoverFillColor: "#F3944C",
       },
       data,

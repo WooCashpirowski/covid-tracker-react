@@ -18,14 +18,9 @@ const Pie = () => {
 
   const data = [
     {
-      label: "Europe",
-      value: countValue("Europe"),
-      displayValue: "Europe",
-    },
-    {
-      label: "Asia",
-      value: countValue("Asia"),
-      displayValue: "Asia",
+      label: "Africa",
+      value: countValue("Africa"),
+      displayValue: "Africa",
     },
     {
       label: "North America",
@@ -33,19 +28,19 @@ const Pie = () => {
       displayValue: "North America",
     },
     {
+      label: "Asia",
+      value: countValue("Asia"),
+      displayValue: "Asia",
+    },
+    {
+      label: "Europe",
+      value: countValue("Europe"),
+      displayValue: "Europe",
+    },
+    {
       label: "South America",
       value: countValue("South America"),
       displayValue: "South America",
-    },
-    {
-      label: "Africa",
-      value: countValue("Africa"),
-      displayValue: "Africa",
-    },
-    {
-      label: "Australia/Oceania",
-      value: countValue("Australia/Oceania"),
-      displayValue: "Australia/Oceania",
     },
   ];
 
@@ -59,7 +54,7 @@ const Pie = () => {
         caption: "Total number of cases in regions",
         showlegend: "0",
         showpercentvalues: "0",
-        palettecolors: "E87271,BD638C,825F90,4B577B,518A38,006F5E",
+        palettecolors: "006F5E,518A38,4B577B,825F90,BD638C",
         usedataplotcolorforlabels: "1",
         decimals: "2",
         labelPosition: "inside",
