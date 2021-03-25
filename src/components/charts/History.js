@@ -33,7 +33,7 @@ const History = () => {
         labelFontSize: "10",
         theme: "candy",
         alignCaptionWithCanvas: 0,
-        labelStep: 15,
+        labelStep: 60,
         slantLabels: 1,
         rotateLabels: 1,
         drawAnchors: 0,
